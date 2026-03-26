@@ -891,9 +891,9 @@ body::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
     width: 180px;
   }
 
-  .epitaph-card {
-    width: 220px;
-    padding: 20px 16px;
+  .graveyard-epitaphs-label,
+  .epitaphs-carousel {
+    display: none;
   }
 
   .creator-card {
