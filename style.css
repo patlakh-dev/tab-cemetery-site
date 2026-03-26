@@ -742,6 +742,11 @@ body::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
   color: var(--accent);
 }
 
+.footer-sep {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
 .footer-x-icon {
   width: 14px;
   height: 14px;
