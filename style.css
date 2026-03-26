@@ -310,38 +310,32 @@ body::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 }
 
 /* ════════════════════════════════════════
-   DEMO
+   HERO DEMO
    ════════════════════════════════════════ */
 
-.demo-section {
-  background: var(--bg);
-  padding-bottom: 60px;
-}
-
-.demo-wrap {
+.hero-demo {
+  margin: 32px auto 36px;
   display: flex;
   justify-content: center;
 }
 
 .demo-phone {
   position: relative;
-  width: 320px;
-  border-radius: 20px;
+  width: 280px;
+  border-radius: 18px;
   overflow: hidden;
   border: 2px solid var(--border-light);
   box-shadow:
     0 8px 60px rgba(0, 0, 0, 0.5),
-    0 0 80px rgba(58, 104, 120, 0.12),
-    inset 0 0 0 1px rgba(138, 172, 184, 0.06);
+    0 0 80px rgba(58, 104, 120, 0.12);
   transition: box-shadow 0.4s ease, transform 0.4s ease;
 }
 
 .demo-phone:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow:
     0 16px 80px rgba(0, 0, 0, 0.6),
-    0 0 100px rgba(58, 104, 120, 0.2),
-    inset 0 0 0 1px rgba(138, 172, 184, 0.1);
+    0 0 100px rgba(58, 104, 120, 0.2);
 }
 
 .demo-gif {
