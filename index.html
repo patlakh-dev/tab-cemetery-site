@@ -435,8 +435,13 @@
         clone.setAttribute('aria-hidden', 'true');
         carousel.appendChild(clone);
       });
-      const totalWidth = cards.reduce((sum, c) => sum + c.offsetWidth + 16, 0);
-      carousel.style.setProperty('--scroll-width', totalWidth + 'px');
+      function setCarouselWidth() {
+        const gap = 16;
+        const totalWidth = cards.reduce((sum, c) => sum + c.offsetWidth + gap, 0);
+        carousel.style.setProperty('--scroll-width', totalWidth + 'px');
+      }
+      setCarouselWidth();
+      window.addEventListener('resize', setCarouselWidth);
     }
   </script>
 </body>

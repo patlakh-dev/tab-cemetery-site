@@ -540,7 +540,7 @@ body::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 .graveyard-section {
   background-image: url('images/bg-ghost.png');
-  overflow: hidden;
+  overflow: clip;
 }
 
 .tombstones-grid {
@@ -604,6 +604,9 @@ body::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
   width: max-content;
   position: relative;
   z-index: 1;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .epitaphs-carousel:hover {
