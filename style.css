@@ -1,0 +1,853 @@
+@font-face {
+  font-family: 'Cinzel';
+  src: url('fonts/cinzel.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #0a1014;
+  --bg-card: rgba(12, 20, 24, 0.85);
+  --bg-card-solid: #111b20;
+  --border: #1e2e34;
+  --border-light: #2a3e46;
+  --text: #8eaab4;
+  --text-dim: #678a94;
+  --text-muted: #4a6570;
+  --accent: #8aacb8;
+  --accent-dim: #5a7a88;
+  --teal: #3a6878;
+  --teal-glow: rgba(58, 104, 120, 0.35);
+  --font-gothic: 'Cinzel', 'Georgia', 'Times New Roman', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar { width: 6px; }
+body::-webkit-scrollbar-track { background: var(--bg); }
+body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+body::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ════════════════════════════════════════
+   BACKGROUND PHOTO SECTIONS
+   ════════════════════════════════════════ */
+
+.has-bg-photo {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.has-bg-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      var(--bg) 0%,
+      rgba(10, 16, 20, 0.75) 8%,
+      rgba(10, 16, 20, 0.65) 50%,
+      rgba(10, 16, 20, 0.75) 92%,
+      var(--bg) 100%
+    );
+  z-index: 0;
+  pointer-events: none;
+}
+
+.has-bg-photo > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ════════════════════════════════════════
+   SCROLL ANIMATIONS
+   ════════════════════════════════════════ */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ════════════════════════════════════════
+   HERO
+   ════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: url('images/cemetery-hero.png') center center / cover no-repeat;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center 40%, rgba(10, 16, 20, 0.3) 0%, rgba(10, 16, 20, 0.85) 70%),
+    linear-gradient(to bottom, rgba(10, 16, 20, 0.2) 0%, rgba(10, 16, 20, 0.6) 60%, var(--bg) 100%);
+}
+
+.hero-glow {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.hero-glow--1 {
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(58, 104, 120, 0.18) 0%, transparent 70%);
+  animation: glowPulse 6s ease-in-out infinite;
+}
+
+.hero-glow--2 {
+  bottom: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(58, 104, 120, 0.08) 0%, transparent 70%);
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.hero-candles {
+  margin-bottom: 24px;
+}
+
+.candles-svg {
+  width: 200px;
+  height: 120px;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 20px rgba(90, 138, 152, 0.3));
+}
+
+.hero-logo {
+  width: 240px;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px;
+  filter:
+    drop-shadow(0 0 6px rgba(138, 172, 184, 0.7))
+    drop-shadow(0 0 20px rgba(90, 138, 152, 0.4))
+    drop-shadow(0 0 40px rgba(58, 104, 120, 0.2));
+  animation: logoFloat 4s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.hero-title {
+  font-family: var(--font-gothic);
+  font-weight: 700;
+  font-size: clamp(32px, 6vw, 56px);
+  color: var(--accent);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 30px rgba(138, 172, 184, 0.5),
+    0 0 60px rgba(58, 104, 120, 0.2),
+    0 2px 20px rgba(0, 0, 0, 0.8);
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+
+.hero-tagline {
+  font-family: var(--font-gothic);
+  font-size: clamp(13px, 2vw, 16px);
+  color: var(--text-dim);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
+}
+
+.hero-sub {
+  font-size: clamp(14px, 1.8vw, 17px);
+  color: var(--text);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-gothic);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 32px;
+  border: 1px solid var(--accent-dim);
+  border-radius: 8px;
+  transition: all 0.4s;
+  cursor: pointer;
+  background: rgba(10, 16, 20, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-cta:hover {
+  background: rgba(58, 104, 120, 0.2);
+  border-color: var(--accent);
+  box-shadow: 0 0 30px rgba(58, 104, 120, 0.3), 0 0 60px rgba(58, 104, 120, 0.1);
+  text-shadow: 0 0 12px rgba(138, 172, 184, 0.5);
+  transform: translateY(-2px);
+}
+
+.cta-chrome-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-muted);
+  animation: scrollBounce 2s ease-in-out infinite;
+  z-index: 2;
+}
+
+.hero-scroll-hint svg {
+  width: 24px;
+  height: 24px;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+  50% { transform: translateX(-50%) translateY(8px); opacity: 0.3; }
+}
+
+/* ════════════════════════════════════════
+   SECTIONS
+   ════════════════════════════════════════ */
+
+.section {
+  padding: 100px 0;
+  position: relative;
+}
+
+.section-title {
+  font-family: var(--font-gothic);
+  font-weight: 700;
+  font-size: clamp(22px, 4vw, 32px);
+  color: var(--accent);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 8px;
+  text-shadow: 0 0 20px rgba(138, 172, 184, 0.3);
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 15px;
+  margin-bottom: 48px;
+}
+
+/* ════════════════════════════════════════
+   HOW IT WORKS — bg-fog-gravestones
+   ════════════════════════════════════════ */
+
+.how-it-works {
+  background-image: url('images/bg-fog-gravestones.png');
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.step-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.step-card:hover {
+  border-color: var(--accent-dim);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(58, 104, 120, 0.15);
+}
+
+.step-card:nth-child(2) { transition-delay: 0.06s; }
+.step-card:nth-child(3) { transition-delay: 0.12s; }
+.step-card:nth-child(4) { transition-delay: 0.18s; }
+.step-card:nth-child(5) { transition-delay: 0.24s; }
+.step-card:nth-child(6) { transition-delay: 0.30s; }
+
+.step-card-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.step-card-body {
+  padding: 16px 18px 18px;
+  border-top: 1px solid var(--border);
+}
+
+.step-card-title {
+  font-family: var(--font-gothic);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  text-shadow: 0 0 12px rgba(138, 172, 184, 0.25);
+}
+
+.step-card-desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+
+/* ════════════════════════════════════════
+   FEATURES — bg-fog-trees
+   ════════════════════════════════════════ */
+
+.features {
+  background-image: url('images/bg-fog-trees.png');
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.feature-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 20px;
+  text-align: center;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s, opacity 0.7s ease, translate 0.7s ease;
+}
+
+.feature-card:nth-child(2) { transition-delay: 0.08s; }
+.feature-card:nth-child(3) { transition-delay: 0.16s; }
+.feature-card:nth-child(4) { transition-delay: 0.24s; }
+.feature-card:nth-child(5) { transition-delay: 0.32s; }
+.feature-card:nth-child(6) { transition-delay: 0.40s; }
+.feature-card:nth-child(7) { transition-delay: 0.48s; }
+.feature-card:nth-child(8) { transition-delay: 0.56s; }
+
+.feature-card:hover {
+  border-color: var(--accent-dim);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(58, 104, 120, 0.2);
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 14px;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.feature-title {
+  font-family: var(--font-gothic);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.feature-desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+
+/* ════════════════════════════════════════
+   THE GRAVEYARD (combined section)
+   ════════════════════════════════════════ */
+
+.graveyard-section {
+  background-image: url('images/bg-ghost.png');
+  overflow: hidden;
+}
+
+.tombstones-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  max-width: 660px;
+  margin: 0 auto 60px;
+}
+
+.tombstone-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  filter: drop-shadow(0 0 8px rgba(138, 172, 184, 0.2)) grayscale(0.2);
+  transition: filter 0.3s, transform 0.3s;
+  cursor: default;
+}
+
+.tombstone-img:hover {
+  filter: drop-shadow(0 0 16px rgba(138, 172, 184, 0.4)) grayscale(0);
+  transform: scale(1.08);
+}
+
+.big-phrase {
+  font-family: var(--font-gothic);
+  font-size: clamp(20px, 3.5vw, 30px);
+  color: var(--accent);
+  text-align: center;
+  font-style: italic;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  max-width: 700px;
+  margin: 0 auto 56px;
+  text-shadow:
+    0 0 30px rgba(138, 172, 184, 0.4),
+    0 2px 15px rgba(0, 0, 0, 0.7);
+  transition: opacity 0.6s ease;
+  border: none;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.graveyard-epitaphs-label {
+  font-family: var(--font-gothic);
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.epitaphs-carousel {
+  display: flex;
+  gap: 16px;
+  animation: scrollCarousel 40s linear infinite;
+  width: max-content;
+  position: relative;
+  z-index: 1;
+}
+
+.epitaphs-carousel:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollCarousel {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-1 * var(--scroll-width, 50%))); }
+}
+
+.epitaph-card {
+  flex-shrink: 0;
+  width: 260px;
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px 20px;
+  transition: border-color 0.3s;
+}
+
+.epitaph-card:hover {
+  border-color: var(--accent-dim);
+}
+
+.epitaph-domain {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.epitaph-text {
+  font-family: var(--font-gothic);
+  font-size: 15px;
+  color: var(--text);
+  font-style: italic;
+  line-height: 1.5;
+  text-shadow: 0 0 10px rgba(138, 172, 184, 0.15);
+}
+
+/* ════════════════════════════════════════
+   CREATOR — cemetery-hero
+   ════════════════════════════════════════ */
+
+.creator-section {
+  background: var(--bg);
+}
+
+.creator-card {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  background: var(--bg-card-solid);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 48px 44px;
+  box-shadow: 0 0 50px rgba(58, 104, 120, 0.08);
+}
+
+.creator-photo-wrap {
+  flex-shrink: 0;
+  position: relative;
+  width: 260px;
+  height: 260px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 0 30px rgba(58, 104, 120, 0.2),
+    0 0 60px rgba(58, 104, 120, 0.08);
+}
+
+.creator-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 70%;
+  display: block;
+  filter: brightness(0.8) contrast(1.1) saturate(0.7);
+}
+
+.creator-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(58, 104, 120, 0.15) 0%, transparent 60%),
+    linear-gradient(to top, rgba(10, 16, 20, 0.5) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.creator-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.creator-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.creator-name {
+  font-family: var(--font-gothic);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(138, 172, 184, 0.3);
+}
+
+.creator-quote {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.75;
+  border: none;
+  padding: 0;
+  margin: 0 0 24px;
+  font-style: italic;
+  position: relative;
+  padding-left: 20px;
+  border-left: 2px solid var(--accent-dim);
+}
+
+.creator-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+
+.creator-social:hover {
+  color: var(--accent);
+}
+
+.creator-social svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ════════════════════════════════════════
+   CTA SECTION
+   ════════════════════════════════════════ */
+
+.cta-section {
+  padding: 80px 0 100px;
+}
+
+.cta-block {
+  text-align: center;
+  background: var(--bg-card-solid);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 60px 40px;
+  box-shadow: 0 0 40px rgba(58, 104, 120, 0.1);
+}
+
+.cta-title {
+  font-family: var(--font-gothic);
+  font-weight: 700;
+  font-size: clamp(22px, 4vw, 34px);
+  color: var(--accent);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  text-shadow: 0 0 20px rgba(138, 172, 184, 0.3);
+}
+
+.cta-desc {
+  color: var(--text-dim);
+  font-size: 15px;
+  margin-bottom: 32px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-bottom {
+  font-size: 14px;
+  padding: 16px 40px;
+}
+
+/* ════════════════════════════════════════
+   FOOTER
+   ════════════════════════════════════════ */
+
+.site-footer {
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.footer-text {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: var(--accent);
+}
+
+.footer-x-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tombstones-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .section {
+    padding: 70px 0;
+  }
+
+  .has-bg-photo {
+    background-attachment: scroll;
+  }
+
+  .hero {
+    background-attachment: scroll;
+  }
+
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .tombstones-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .cta-block {
+    padding: 40px 24px;
+  }
+
+  .hero-logo {
+    width: 180px;
+  }
+
+  .epitaph-card {
+    width: 220px;
+    padding: 20px 16px;
+  }
+
+  .creator-card {
+    flex-direction: column;
+    padding: 0;
+    text-align: center;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .creator-photo-wrap {
+    width: 100%;
+    height: 200px;
+    border-radius: 0;
+  }
+
+  .creator-text {
+    padding: 28px 24px 32px;
+  }
+
+  .creator-quote {
+    padding-left: 0;
+    border-left: none;
+    border-top: 2px solid var(--accent-dim);
+    padding-top: 16px;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tombstones-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero-cta, .cta-bottom {
+    font-size: 11px;
+    padding: 12px 24px;
+    letter-spacing: 2px;
+  }
+}
