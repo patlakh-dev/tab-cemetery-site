@@ -17,6 +17,49 @@
       <div class="hero-glow hero-glow--2"></div>
     </div>
 
+    <div class="ghost-tabs" id="ghost-tabs" aria-hidden="true">
+      <div class="ghost-tab ghost-tab--left" style="top:12%;left:2%">
+        <img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=32" alt="" class="ghost-tab-icon">
+        <span>YouTube - Watch L...</span>
+      </div>
+      <div class="ghost-tab ghost-tab--left" style="top:28%;left:6%">
+        <img src="https://www.google.com/s2/favicons?domain=reddit.com&sz=32" alt="" class="ghost-tab-icon">
+        <span>reddit - Best of...</span>
+      </div>
+      <div class="ghost-tab ghost-tab--left" style="top:46%;left:1%">
+        <img src="https://www.google.com/s2/favicons?domain=amazon.com&sz=32" alt="" class="ghost-tab-icon">
+        <span>Amazon - Cart (3)</span>
+      </div>
+      <div class="ghost-tab ghost-tab--left" style="top:64%;left:5%">
+        <img src="https://www.google.com/s2/favicons?domain=stackoverflow.com&sz=32" alt="" class="ghost-tab-icon">
+        <span>How to center a div...</span>
+      </div>
+      <div class="ghost-tab ghost-tab--left" style="top:80%;left:3%">
+        <img src="https://www.google.com/s2/favicons?domain=notion.so&sz=32" alt="" class="ghost-tab-icon">
+        <span>Notion - Project Notes</span>
+      </div>
+      <div class="ghost-tab ghost-tab--right" style="top:10%;right:3%">
+        <img src="https://www.google.com/s2/favicons?domain=medium.com&sz=32" alt="" class="ghost-tab-icon">
+        <span>Medium - Must Read...</span>
+      </div>
+      <div class="ghost-tab ghost-tab--right" style="top:26%;right:1%">
+        <img src="https://www.google.com/s2/favicons?domain=twitter.com&sz=32" alt="" class="ghost-tab-icon">
+        <span>X - Trending</span>
+      </div>
+      <div class="ghost-tab ghost-tab--right" style="top:44%;right:5%">
+        <img src="https://www.google.com/s2/favicons?domain=github.com&sz=32" alt="" class="ghost-tab-icon">
+        <span>GitHub - Pull #42</span>
+      </div>
+      <div class="ghost-tab ghost-tab--right" style="top:62%;right:2%">
+        <img src="https://www.google.com/s2/favicons?domain=docs.google.com&sz=32" alt="" class="ghost-tab-icon">
+        <span>Google Docs - Draft</span>
+      </div>
+      <div class="ghost-tab ghost-tab--right" style="top:78%;right:6%">
+        <img src="https://www.google.com/s2/favicons?domain=spotify.com&sz=32" alt="" class="ghost-tab-icon">
+        <span>Spotify - Discover</span>
+      </div>
+    </div>
+
     <div class="hero-content">
       <div class="hero-candles" aria-hidden="true">
         <svg class="candles-svg" viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
@@ -350,6 +393,16 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    const ghostTabs = document.getElementById('ghost-tabs');
+    if (ghostTabs) {
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const fadeEnd = window.innerHeight * 0.5;
+        const opacity = Math.max(0, 1 - scrollY / fadeEnd);
+        ghostTabs.style.opacity = opacity;
+      }, { passive: true });
+    }
 
     const PHRASES = [
       "The cemetery grows. Your RAM rejoices.",
